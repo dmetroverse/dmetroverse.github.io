@@ -27,7 +27,7 @@ const Footer = () => {
       }}
     >
       <Link
-        href="https://github.com/dmetroverse-code"
+        href="https://github.com/dmetroverse/dmetroverse-code"
         target="_blank"
         rel="noopener noreferrer"
         sx={{
