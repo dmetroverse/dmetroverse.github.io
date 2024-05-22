@@ -6,4 +6,4 @@
 
 [dmetroverse]: https://dmetroverse.github.io
 
-[dmetroverse]: https://www.github.com/dmetroverse/dmetroverse
+[dmetroverse]: https://www.github.com/dmetroverse-code
