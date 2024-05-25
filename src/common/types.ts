@@ -118,8 +118,10 @@ export interface JourneyContextType {
 export interface HeaderProps {
   setShowFoodFacilities: (show: boolean) => void;
   setShowRedditPosts: (show: boolean) => void;
+  
   showFoodFacilities: boolean;
   showRedditPosts: boolean;
+  
 }
 
 export interface Station {
