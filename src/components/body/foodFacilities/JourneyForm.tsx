@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { JourneyContext } from "../../../context/JourneyContext";
 import { station_list } from "../../../data/en/station_list";
 import {
@@ -13,7 +13,9 @@ import {
   useTheme,
   useMediaQuery,
   Typography,
+  Box,
 } from "@mui/material";
+
 interface Station {
   station_code: string;
   station_name: string;
@@ -42,6 +44,14 @@ const JourneyForm: React.FC = () => {
     journeyType || "least-distance"
   );
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState("");
+
+  useEffect(() => {
+    setIsSubmitting(false);
+    setSubmitMessage("");
+  }, [localOrigin, localDestination, localJourneyType]);
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (
@@ -55,7 +65,10 @@ const JourneyForm: React.FC = () => {
     setOrigin(localOrigin.station_code);
     setDestination(localDestination.station_code);
     setJourneyType(localJourneyType);
+    setIsSubmitting(true);
+    setSubmitMessage("Form submitted. Please wait...");
   };
+
   const mobileStyles = {
     autocomplete: {
       width: isMobile ? "100%" : 240,
@@ -76,6 +89,7 @@ const JourneyForm: React.FC = () => {
       flexWrap: "wrap",
     },
   };
+
   return (
     <AppBar position="static" color="default" elevation={0}>
       <Toolbar
@@ -137,10 +151,18 @@ const JourneyForm: React.FC = () => {
           variant="contained"
           color="primary"
           sx={mobileStyles.submitButton}
+          disabled={isSubmitting}
         >
           Submit
         </Button>
       </Toolbar>
+      {submitMessage && (
+        <Box sx={{ textAlign: "center", mt: 1 }}>
+          <Typography variant="body2" color="textSecondary">
+            {submitMessage}
+          </Typography>
+        </Box>
+      )}
     </AppBar>
   );
 };
