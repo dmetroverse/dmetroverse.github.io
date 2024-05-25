@@ -23,7 +23,7 @@ const Body: React.FC<{
           setJourneyType,
         }}
       >
-        {showFoodFacilities && <FacilitiesContainer showFoodFacilities={showFoodFacilities} />}
+        {showFoodFacilities && <FacilitiesContainer />}
       </JourneyContext.Provider>
       {showRedditPosts && <GalleryContainer />}
     </div>

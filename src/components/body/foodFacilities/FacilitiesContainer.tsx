@@ -3,9 +3,7 @@ import { Paper, Box, Typography } from "@mui/material";
 import JourneyForm from "./JourneyForm";
 import FoodFacilities from "./FoodFacilities";
 
-const FacilitiesContainer: React.FC<{
-  showFoodFacilities: boolean;
-}> = ({ showFoodFacilities }) => {
+const FacilitiesContainer: React.FC = () => {
   return (
     <Paper
       elevation={3}
@@ -42,11 +40,10 @@ const FacilitiesContainer: React.FC<{
       </Typography>
       <Box sx={{ width: "100%", maxWidth: "600px", mx: "auto" }}>
         <JourneyForm />
-        {showFoodFacilities && (
-          <Box sx={{ width: "100%", mt: 2 }}>
-            <FoodFacilities />
-          </Box>
-        )}
+
+        <Box sx={{ width: "100%", mt: 2 }}>
+          <FoodFacilities />
+        </Box>
       </Box>
     </Paper>
   );
