@@ -14,8 +14,9 @@ import {
   useMediaQuery,
   Typography,
   Box,
+  IconButton,
 } from "@mui/material";
-
+import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 interface Station {
   station_code: string;
   station_name: string;
@@ -69,11 +70,23 @@ const JourneyForm: React.FC = () => {
     setSubmitMessage("Form submitted. Please wait...");
   };
 
+  const handleSwap = () => {
+    const temp = localOrigin;
+    setLocalOrigin(localDestination);
+    setLocalDestination(temp);
+  };
+
   const mobileStyles = {
     autocomplete: {
-      width: isMobile ? "100%" : 240,
+      width: isMobile ? "100%" : 180,
       margin: theme.spacing(1, 0),
     },
+    swapButton: {
+      margin: theme.spacing(isMobile ? 0 : 0.5),
+      display: "flex",
+      alignItems: "center",
+    },
+
     radioGroup: {
       flexDirection: isMobile ? "row" : "column",
       margin: theme.spacing(0.5, 0),
@@ -99,7 +112,7 @@ const JourneyForm: React.FC = () => {
           display: "flex",
           justifyContent: "space-around",
           alignItems: "center",
-          gap: 0.1,
+          gap: 0.5,
           flexWrap: "wrap",
         }}
       >
@@ -114,6 +127,16 @@ const JourneyForm: React.FC = () => {
           sx={mobileStyles.autocomplete}
           size={isMobile ? "medium" : "small"}
         />
+
+        <Button
+          onClick={handleSwap}
+          sx={mobileStyles.swapButton}
+          size="small"
+          color="primary"
+          startIcon={<SwapHorizIcon />} // This will place the icon on the left
+        >
+          Swap
+        </Button>
 
         <Autocomplete
           options={station_list}

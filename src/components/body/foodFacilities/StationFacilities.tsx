@@ -34,9 +34,10 @@ const StationFacilities: React.FC<StationFacilitiesProps> = ({ station }) => {
           border: "1px solid #ddd", // Added border
         }}
       >
-        <Typography
-          variant="h6"
-          component="h3"
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
           style={{
             position: "sticky",
             top: 0,
@@ -46,16 +47,15 @@ const StationFacilities: React.FC<StationFacilitiesProps> = ({ station }) => {
             textAlign: "center",
           }}
         >
-          {station.stationName}
+          <Typography variant="h6" component="h3" style={{ flexGrow: 1 }}>
+            {station.stationName}
+          </Typography>
           {!hasNoFacilities && (
-            <IconButton
-              onClick={handleOpen}
-              style={{ position: "absolute", right: "0.5rem", top: "0.5rem" }}
-            >
-              <OpenWithIcon style={{ color: "white" }} />
+            <IconButton onClick={handleOpen} style={{ color: "white" }}>
+              <OpenWithIcon />
             </IconButton>
           )}
-        </Typography>
+        </Box>
         <Box
           style={{
             overflow: "scroll",
