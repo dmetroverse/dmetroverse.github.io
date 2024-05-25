@@ -5,7 +5,7 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import OpenWithIcon from "@mui/icons-material/OpenWith";
 import StationFacilitiesModal from "./StationFacilitiesModal"; // Import the new modal component
 
 interface StationFacilitiesProps {
@@ -47,12 +47,14 @@ const StationFacilities: React.FC<StationFacilitiesProps> = ({ station }) => {
           }}
         >
           {station.stationName}
-          <IconButton
-            onClick={handleOpen}
-            style={{ position: "absolute", right: "0.5rem", top: "0.5rem" }}
-          >
-            <ExpandMoreIcon style={{ color: "white" }} />
-          </IconButton>
+          {!hasNoFacilities && (
+            <IconButton
+              onClick={handleOpen}
+              style={{ position: "absolute", right: "0.5rem", top: "0.5rem" }}
+            >
+              <OpenWithIcon style={{ color: "white" }} />
+            </IconButton>
+          )}
         </Typography>
         <Box
           style={{

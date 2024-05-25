@@ -23,6 +23,7 @@ const StationFacilitiesModal: React.FC<StationFacilitiesModalProps> = ({
   facilities,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
+  const { mode } = useTheme();
 
   const filteredFacilities = facilities.flatMap(
     (facility: Facility, facilityIndex) =>
@@ -31,34 +32,39 @@ const StationFacilitiesModal: React.FC<StationFacilitiesModalProps> = ({
       )
   );
 
+  const modalStyle = {
+    position: "absolute" as "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "80%",
+    maxHeight: "80%",
+    overflow: "auto",
+    padding: "1rem",
+    backgroundColor: mode === "dark" ? "#424242" : "#fff",
+    color: mode === "dark" ? "#fff" : "#000",
+    borderRadius: "8px",
+    boxShadow: mode === "dark" ? "0 0 10px #333" : "0 0 10px #ccc",
+  };
+
   return (
     <Modal open={open} onClose={handleClose}>
-      <Paper
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: "80%",
-          maxHeight: "80%",
-          overflow: "auto",
-          padding: "1rem",
-        }}
-      >
+      <Paper sx={modalStyle}>
         <Box
           display="flex"
           justifyContent="space-between"
           alignItems="center"
-          style={{
+          sx={{
             position: "sticky",
             top: 0,
-            backgroundColor: "#fff",
+            backgroundColor: mode === "dark" ? "#424242" : "#fff",
             zIndex: 1,
+            padding: "0.5rem 0",
           }}
         >
           <Typography variant="h6">{stationName}</Typography>
           <IconButton onClick={handleClose}>
-            <CloseIcon />
+            <CloseIcon style={{ color: mode === "dark" ? "#fff" : "#000" }} />
           </IconButton>
         </Box>
         <TextField
@@ -68,11 +74,17 @@ const StationFacilitiesModal: React.FC<StationFacilitiesModalProps> = ({
           label="Search Facilities"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
+          sx={{
+            position: "sticky",
+            top: "3rem",
+            backgroundColor: mode === "dark" ? "#424242" : "#fff",
+            zIndex: 1,
+          }}
         />
         <Box
-          style={{
+          sx={{
             overflow: "scroll",
-            maxHeight: "calc(100% - 5rem)",
+            maxHeight: "calc(100% - 7rem)",
             padding: "1rem",
           }}
         >
